@@ -41,6 +41,7 @@ List of all extra dependencies in this template:
 
 ## Structures
 
+ ```
 📦 project
     ├──📂components - UI components for easy re-use 
     ├──📂consts - constant variables
@@ -52,3 +53,4 @@ List of all extra dependencies in this template:
     ├──📂routes - routing setup
     ├──📂store - redux store
     └──📂utils - helpers and utility functions
+ ```
