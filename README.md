@@ -42,7 +42,7 @@ List of all extra dependencies in this template:
 ## Structures
 
 📦 project
-    ├──📂components - UI components for easy re-use
+    ├──📂components - UI components for easy re-use 
     ├──📂consts - constant variables
     ├──📂contexts - react contexts
     ├──📂hooks - react customized hooks
