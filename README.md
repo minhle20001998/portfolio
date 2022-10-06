@@ -38,6 +38,7 @@ List of all extra dependencies in this template:
 
 1. [react-router & react-router-dom v6](https://reactrouter.com/en/main)
 2. [axios](https://axios-http.com/)
+3. [eslint-config-prettier & eslint-plugin-prettier & prettier](https://www.npmjs.com/package/eslint-config-prettier)
 
 ## Structures
 
