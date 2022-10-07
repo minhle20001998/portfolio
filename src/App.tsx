@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.css';
 import { useRoutes } from 'react-router';
+import { AppWrapper } from './App.styled';
 import { routesGenerator } from './routes';
 
 function App() {
   const content = useRoutes(routesGenerator());
-  return <div className="App">{content}</div>;
+  return <AppWrapper className="App">{content}</AppWrapper>;
 }
 
 export default App;
