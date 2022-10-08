@@ -1,20 +1,17 @@
 import { Resizable } from 're-resizable';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon, InfoIcon } from '../../assets/icons/dark';
+import { contentList } from '../../consts';
 import { IFolderStructure } from '../../interfaces';
 import { FolderStructureWrapper } from './FolderStructure.styled';
 
 const structures: IFolderStructure = {
   title: 'my-portfolio',
   folder: true,
-  children: [
-    { title: 'overview.md' },
-    { title: 'skills.md' },
-    { title: 'experience.md' },
-    { title: 'education.md' },
-    { title: 'projects.md' }
-  ]
+  children: contentList
 };
+
 export const FolderStructure = React.forwardRef<HTMLDivElement, any>((props, ref) => {
   return (
     <Resizable defaultSize={{ width: 300, height: '100%' }} minWidth={160} maxWidth={'50%'} enable={{ right: true }}>
@@ -43,8 +40,16 @@ const FileView = ({ structures, count = 1 }: { structures: IFolderStructure; cou
     setOpen(prev => !prev);
   };
 
+  const navigate = useNavigate();
+
+  const handleFileClick = () => {
+    if (structures.link) {
+      navigate(structures.link);
+    }
+  };
+
   return (
-    <div className="file">
+    <div className="file" onClick={handleFileClick}>
       <div
         className="file-view"
         onClick={toggleOpen}

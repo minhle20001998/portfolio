@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CustomThemeProvider from './contexts/CustomThemeContext';
 import { BrowserRouter } from 'react-router-dom';
+import { ContentProvider } from './contexts';
 
 const Providers = ({ providers, children }: { providers: JSX.Element[]; children: JSX.Element }) => {
   const renderProvider = (providers: JSX.Element[], children: JSX.Element): JSX.Element => {
@@ -23,7 +24,7 @@ const Providers = ({ providers, children }: { providers: JSX.Element[]; children
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <Providers providers={[<BrowserRouter />, <CustomThemeProvider />]}>
+    <Providers providers={[<BrowserRouter />, <CustomThemeProvider />, <ContentProvider />]}>
       <App />
     </Providers>
   </React.StrictMode>

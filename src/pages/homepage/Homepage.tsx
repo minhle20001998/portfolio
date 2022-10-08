@@ -1,4 +1,4 @@
-import { FolderStructure, Footer, Toolbar } from '../components';
+import { Editor, FolderStructure, Footer, Toolbar } from '../../components';
 import { HomepageWrapper } from './Homepage.styled';
 
 export function Homepage() {
@@ -7,6 +7,7 @@ export function Homepage() {
       <section>
         <Toolbar />
         <FolderStructure />
+        <Editor />
       </section>
       <Footer />
     </HomepageWrapper>

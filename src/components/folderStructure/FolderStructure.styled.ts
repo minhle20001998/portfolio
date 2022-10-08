@@ -24,7 +24,7 @@ export const FolderStructureWrapper = styled.div`
 
   & .structure-workspace {
     display: flex;
-    padding: 3px 2px;
+    padding: 3px 2px 1px 2px;
     gap: 2px;
   }
 
@@ -40,6 +40,10 @@ export const FolderStructureWrapper = styled.div`
   & .file {
     cursor: pointer;
     user-select: none;
+
+    a {
+      text-decoration: none;
+    }
   }
 
   & .file-view {

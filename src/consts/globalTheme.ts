@@ -8,6 +8,8 @@ interface IGlobalTheme {
   primaryTextColor: string;
   secondaryTextColor: string;
   subSecondaryTextColor: string;
+  subTabColor: string;
+  subTabHoverColor: string;
   primaryButtonColor: string;
   secondaryButtonColor: string;
   primaryIconColor: string;
@@ -32,6 +34,8 @@ export const globalTheme = (theme: THEME): IGlobalTheme => {
     subSecondaryTextColor: getColorByTheme('#bbbbbb', '#bbbbbb'),
     primaryButtonColor: getColorByTheme('#0e639c', '#0e639c'),
     secondaryButtonColor: getColorByTheme('', ''),
+    subTabColor: getColorByTheme('rgb(45, 45, 45)', ''),
+    subTabHoverColor: getColorByTheme('rgba(90, 93, 94, 0.31)', ''),
     primaryIconColor: getColorByTheme('#ffffff', '#ffffff'),
     secondaryIconColor: getColorByTheme('#848484', '#848484'),
     green: 'rgb(22, 130, 93)',
