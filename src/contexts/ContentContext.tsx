@@ -60,7 +60,7 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
         break;
       }
       case CONTENT_ACTIONS.REMOVE_TAB: {
-        removeContentFromTabs(payload);
+        removeTab(payload);
         break;
       }
       default:
@@ -74,7 +74,7 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     }
   };
 
-  const removeContentFromTabs = (filename: string) => {
+  const removeTab = (filename: string) => {
     let adjacent: string | null = null;
     const filteredArray = contentTabs.filter((tab, index) => {
       if (pathname.split('/')[1] === filename && tab === filename) {
@@ -82,12 +82,14 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
           adjacent = contentTabs[index - 1];
         } else if (contentTabs[index + 1]) {
           adjacent = contentTabs[index + 1];
+        } else {
+          adjacent = '';
         }
       }
       return tab !== filename;
     });
     if (adjacent) navigate(adjacent);
-    else navigate('/');
+    else if (adjacent === '') navigate('/');
     setContentTabs(filteredArray);
   };
 
