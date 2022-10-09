@@ -29,8 +29,8 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     contentList[0].raw
   );
   const [contentTabs, setContentTabs] = useState<string[]>([]);
-  const currentContent = currentContentKey ? contents.get(currentContentKey) : null;
   const firstCounterRef = useRef<boolean>(false);
+  const currentContent = currentContentKey ? contents.get(currentContentKey) : null;
 
   useEffect(() => {
     // if website is first time loaded -> navigate to the first content
@@ -49,7 +49,7 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     firstCounterRef.current = true;
   }, [pathname]);
 
-  const contentReducer = (action: CONTENT_ACTIONS, payload?: any) => {
+  const contentReducer = (action: CONTENT_ACTIONS, payload?: any): void => {
     switch (action) {
       case CONTENT_ACTIONS.FETCH_CONTENT: {
         getContent(payload);
@@ -68,13 +68,21 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     }
   };
 
-  const addContentTab = (filename: string) => {
+  const addContentTab = (filename: string): void => {
     if (!contentTabs.find(tab => tab === filename)) {
-      setContentTabs(prev => [filename, ...prev]);
+      let indexOfContent;
+      if (currentContentKey) {
+        indexOfContent = contentTabs.indexOf(currentContentKey);
+        const leftHalf = contentTabs.slice(0, indexOfContent + 1);
+        const rightHalf = contentTabs.slice(indexOfContent + 1);
+        setContentTabs([...leftHalf, filename, ...rightHalf]);
+      } else {
+        setContentTabs(prev => [filename, ...prev]);
+      }
     }
   };
 
-  const removeTab = (filename: string) => {
+  const removeTab = (filename: string): void => {
     let adjacent: string | null = null;
     const filteredArray = contentTabs.filter((tab, index) => {
       if (pathname.split('/')[1] === filename && tab === filename) {
@@ -93,7 +101,7 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     setContentTabs(filteredArray);
   };
 
-  const getContent = async (filename?: string) => {
+  const getContent = async (filename?: string): Promise<void> => {
     const name = filename ?? pathname.split('/')[1];
     setCurrentContentKey(name);
     //if content is already in the list -> not fetch

@@ -4,6 +4,14 @@ export const EditorContentWrapper = styled.div`
   padding: 16px 28px;
   height: calc(100% - 35px);
   overflow: auto;
+  background: linear-gradient(${({ theme }) => theme.primaryColor} 33%, rgba(108, 71, 229, 0)),
+    linear-gradient(rgba(108, 71, 229, 0), ${({ theme }) => theme.primaryColor} 66%) 0 100%,
+    radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)) 0 100%;
+  background-color: ${({ theme }) => theme.primaryColor};
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
+  background-size: 100% 45px, 100% 45px, 100% 15px, 100% 15px;
 
   &::-webkit-scrollbar {
     width: 14px;
