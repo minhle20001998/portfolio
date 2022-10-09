@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon, InfoIcon } from '../../assets/icons/dark';
 import { contentList } from '../../consts';
+import { useContentContext } from '../../contexts';
 import { IFolderStructure } from '../../interfaces';
 import { FolderStructureWrapper } from './FolderStructure.styled';
 
@@ -14,7 +15,12 @@ const structures: IFolderStructure = {
 
 export const FolderStructure = React.forwardRef<HTMLDivElement, any>((props, ref) => {
   return (
-    <Resizable defaultSize={{ width: 300, height: '100%' }} minWidth={160} maxWidth={'50%'} enable={{ right: true }}>
+    <Resizable
+      defaultSize={{ width: 300, height: '100%' }}
+      minWidth={160}
+      maxWidth={'50%'}
+      enable={{ right: true }}
+    >
       <FolderStructureWrapper ref={ref}>
         <div className="title-container">
           <h2 className="title">Explorer</h2>
@@ -35,6 +41,8 @@ export const FolderStructure = React.forwardRef<HTMLDivElement, any>((props, ref
 
 const FileView = ({ structures, count = 1 }: { structures: IFolderStructure; count?: number }) => {
   const [open, setOpen] = useState(true);
+  const { currentContent } = useContentContext();
+  const isSelected = !structures.folder && currentContent?.title === structures.raw;
 
   const toggleOpen = () => {
     setOpen(prev => !prev);
@@ -51,7 +59,7 @@ const FileView = ({ structures, count = 1 }: { structures: IFolderStructure; cou
   return (
     <div className="file" onClick={handleFileClick}>
       <div
-        className="file-view"
+        className={`file-view ${isSelected ? 'selected' : ''}`}
         onClick={toggleOpen}
         style={{ paddingLeft: `${16 * count + 'px'}`, paddingRight: `${16 * count + 'px'}` }}
       >

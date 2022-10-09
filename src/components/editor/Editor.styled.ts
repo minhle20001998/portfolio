@@ -3,12 +3,34 @@ import styled from 'styled-components';
 export const EditorWrapper = styled.div`
   flex: 1;
   background-color: transparent;
+  overflow: auto;
 `;
 
 export const EditorTabsWrapper = styled.div`
   display: flex;
+  overflow-x: auto;
+  background-color: ${({ theme }) => theme.secondaryColor};
+
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    cursor: grab;
+    background: ${({ theme }) => theme.scrollbarColor};
+    visibility: hidden;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+  &:hover::-webkit-scrollbar {
+    height: 4px;
+  }
 
   & .tab {
+    border-right: 1px solid ${({ theme }) => theme.secondaryColor};
     width: 120px;
     height: 35px;
     padding-left: 10px;
@@ -43,6 +65,7 @@ export const EditorTabsWrapper = styled.div`
     span {
       flex: 1;
       font-size: 13px;
+      margin-right: 8px;
       color: ${({ theme }) => theme.subSecondaryTextColor};
     }
   }
@@ -54,7 +77,7 @@ export const EditorTabsWrapper = styled.div`
   }
 
   & .tab.active {
-    background-color: transparent !important;
+    background-color: ${({ theme }) => theme.primaryColor};
 
     span {
       color: ${({ theme }) => theme.primaryTextColor};

@@ -23,11 +23,9 @@ const Providers = ({ providers, children }: { providers: JSX.Element[]; children
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <Providers providers={[<BrowserRouter />, <CustomThemeProvider />, <ContentProvider />]}>
-      <App />
-    </Providers>
-  </React.StrictMode>
+  <Providers providers={[<BrowserRouter />, <CustomThemeProvider />, <ContentProvider />]}>
+    <App />
+  </Providers>
 );
 
 // If you want to start measuring performance in your app, pass a function

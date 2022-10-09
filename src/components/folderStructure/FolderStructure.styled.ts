@@ -76,4 +76,8 @@ export const FolderStructureWrapper = styled.div`
       background-color: #2a2d2e;
     }
   }
+
+  & .file-view.selected {
+    background-color: ${({ theme }) => theme.selectedFileColor};
+  }
 `;
