@@ -1,5 +1,11 @@
 import React from 'react';
-import { BellIcon, ErrorIcon, FeedbackIcon, RemoteIcon, WarningIcon } from '../../assets/icons/dark';
+import {
+  BellIcon,
+  ErrorIcon,
+  FeedbackIcon,
+  RemoteIcon,
+  WarningIcon
+} from '../../assets/icons/dark';
 import { FooterWrapper } from './Footer.styled';
 
 export function Footer() {

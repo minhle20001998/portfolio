@@ -7,7 +7,13 @@ import CustomThemeProvider from './contexts/CustomThemeContext';
 import { BrowserRouter } from 'react-router-dom';
 import { ContentProvider } from './contexts';
 
-const Providers = ({ providers, children }: { providers: JSX.Element[]; children: JSX.Element }) => {
+const Providers = ({
+  providers,
+  children
+}: {
+  providers: JSX.Element[];
+  children: JSX.Element;
+}) => {
   const renderProvider = (providers: JSX.Element[], children: JSX.Element): JSX.Element => {
     const [provider, ...restProviders] = providers;
 
