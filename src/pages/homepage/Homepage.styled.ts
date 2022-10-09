@@ -8,6 +8,6 @@ export const HomepageWrapper = styled.div`
   & section {
     display: flex;
     flex-direction: row;
-    flex: 1;
+    height: calc(100% - 22px);
   }
 `;

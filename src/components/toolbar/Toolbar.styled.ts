@@ -7,6 +7,20 @@ export const ToolbarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    cursor: grab;
+    background: ${({ theme }) => theme.scrollbarColor};
+    visibility: hidden;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
 
   & .icon-wrapper {
     width: 100%;

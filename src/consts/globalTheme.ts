@@ -5,6 +5,7 @@ interface IGlobalTheme {
   primaryColor: string;
   secondaryColor: string;
   subSecondaryColor: string;
+  markdownParagraphColor: string;
   primaryTextColor: string;
   secondaryTextColor: string;
   subSecondaryTextColor: string;
@@ -19,6 +20,7 @@ interface IGlobalTheme {
   green: string;
   blue: string;
   white: string;
+  link: string;
 }
 
 export const globalTheme = (theme: THEME): IGlobalTheme => {
@@ -33,6 +35,7 @@ export const globalTheme = (theme: THEME): IGlobalTheme => {
     subSecondaryColor: getColorByTheme('#333333', ''),
     primaryTextColor: getColorByTheme('#ffffff', '#ffffff'),
     secondaryTextColor: getColorByTheme('#cccccc', '#cccccc'),
+    markdownParagraphColor: getColorByTheme('#c9d1d9', ''),
     subSecondaryTextColor: getColorByTheme('#bbbbbb', '#bbbbbb'),
     primaryButtonColor: getColorByTheme('#0e639c', '#0e639c'),
     secondaryButtonColor: getColorByTheme('', ''),
@@ -44,6 +47,7 @@ export const globalTheme = (theme: THEME): IGlobalTheme => {
     scrollbarColor: getColorByTheme('#4b4b4b', ''),
     green: 'rgb(22, 130, 93)',
     blue: 'rgb(0, 122, 204)',
-    white: '#ffffff'
+    white: '#ffffff',
+    link: '#58a6ff'
   };
 };
