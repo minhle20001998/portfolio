@@ -75,6 +75,8 @@ export const FooterWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    user-select: none;
 
     svg {
       width: 14px;

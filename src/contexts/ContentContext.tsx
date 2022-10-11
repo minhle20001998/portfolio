@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AxiosError } from 'axios';
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { getPublicContentFromHost } from '../apis';
 import { contentList } from '../consts';
-import { CONTENT_ACTIONS, IContent } from '../interfaces';
+import { CONTENT_ACTIONS } from '../consts';
+import { IContent } from '../interfaces';
 
 interface IContentContext {
   contentTabs: string[];
@@ -40,7 +42,6 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     // if URL pathname changed -> render the corresponding content
     else if (pathname !== '/' || !contentList[0].raw) {
       contentReducer(CONTENT_ACTIONS.FETCH_CONTENT);
-      addContentTab(pathname.split('/')[1]);
     }
     // if no pathname detected -> remove current content key
     else {
@@ -49,10 +50,21 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     firstCounterRef.current = true;
   }, [pathname]);
 
-  const contentReducer = (action: CONTENT_ACTIONS, payload?: any): void => {
+  const contentReducer = async (action: CONTENT_ACTIONS, payload?: any): Promise<void> => {
     switch (action) {
+      /**
+       * fetch content
+       *  -> if success then create and add new tab
+       *  -> else navigate to default page
+       */
       case CONTENT_ACTIONS.FETCH_CONTENT: {
-        getContent(payload);
+        const contentError = await getContent(payload);
+        if (contentError?.error) {
+          setCurrentContentKey(null);
+          navigate('/');
+        } else {
+          addContentTab(pathname.split('/')[1]);
+        }
         break;
       }
       case CONTENT_ACTIONS.CHANGE_TAB: {
@@ -68,6 +80,11 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     }
   };
 
+  /**
+   * add a tab to tabs list
+   *  ->if current tab then add new tab to the right side of it
+   *  ->else add new tab
+   */
   const addContentTab = (filename: string): void => {
     if (!contentTabs.find(tab => tab === filename)) {
       let indexOfContent;
@@ -82,6 +99,11 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     }
   };
 
+  /**
+   * remove a tab from tabs list
+   *  if a removed tab is a current tab
+   *    navigate to the adjacent tab if exist
+   */
   const removeTab = (filename: string): void => {
     let adjacent: string | null = null;
     const filteredArray = contentTabs.filter((tab, index) => {
@@ -101,21 +123,28 @@ export function ContentProvider({ children }: { children?: JSX.Element }) {
     setContentTabs(filteredArray);
   };
 
-  const getContent = async (filename?: string): Promise<void> => {
+  const getContent = async (
+    filename?: string
+  ): Promise<
+    | {
+        error: AxiosError<unknown, any> | null;
+      }
+    | undefined
+  > => {
     const name = filename ?? pathname.split('/')[1];
     setCurrentContentKey(name);
     //if content is already in the list -> not fetch
     if (contents.get(name)) {
       return;
     }
-    //else
     const { value, error } = await getPublicContentFromHost(filename ?? pathname);
     if (value) {
       contents.set(name, createContentObj(name, value.data));
       setContents(prev => new Map(prev));
+      return { error: null };
     }
     if (error) {
-      console.log(error);
+      return { error };
     }
   };
 

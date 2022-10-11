@@ -6,9 +6,13 @@ import {
   RemoteIcon,
   WarningIcon
 } from '../../assets/icons/dark';
+import { TRANSLATION_ACTIONS } from '../../consts';
+import { useTranslationContext } from '../../contexts';
 import { FooterWrapper } from './Footer.styled';
 
 export function Footer() {
+  const { language, translationReducer } = useTranslationContext();
+
   return (
     <FooterWrapper>
       <div className="remote-wrapper">
@@ -22,8 +26,13 @@ export function Footer() {
           <span>0</span>
         </div>
         <div className="right-status-bar">
-          <div className="keyboard-layout">
-            <span>Layout: VN</span>
+          <div
+            className="keyboard-layout"
+            onClick={() => {
+              translationReducer(TRANSLATION_ACTIONS.TOGGLE);
+            }}
+          >
+            <span>Layout: {language.toUpperCase()}</span>
           </div>
           <div>
             <FeedbackIcon />

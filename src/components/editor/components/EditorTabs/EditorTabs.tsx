@@ -1,6 +1,6 @@
 import { CloseIcon, InfoIcon } from '../../../../assets/icons/dark';
+import { CONTENT_ACTIONS } from '../../../../consts';
 import { useContentContext } from '../../../../contexts';
-import { CONTENT_ACTIONS } from '../../../../interfaces';
 import { EditorTabsWrapper } from './EditorTabs.styled';
 
 export function EditorTabs() {

@@ -2,20 +2,19 @@ import { Resizable } from 're-resizable';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon, InfoIcon } from '../../assets/icons/dark';
-import { contentList } from '../../consts';
 import { useContentContext } from '../../contexts';
 import { IFolderStructure } from '../../interfaces';
 import { FolderStructureWrapper } from './FolderStructure.styled';
-
-const structures: IFolderStructure = {
-  title: 'my-portfolio',
-  folder: true,
-  children: contentList
-};
+import './FolderStructure.css';
+import { ELabels, structures } from '../../consts';
+import { useTranslation } from 'react-i18next';
 
 export const FolderStructure = React.forwardRef<HTMLDivElement, any>((props, ref) => {
+  const { t } = useTranslation();
+
   return (
     <Resizable
+      className="resize-able"
       defaultSize={{ width: 300, height: '100%' }}
       minWidth={160}
       maxWidth={'50%'}
@@ -23,17 +22,18 @@ export const FolderStructure = React.forwardRef<HTMLDivElement, any>((props, ref
     >
       <FolderStructureWrapper ref={ref}>
         <div className="title-container">
-          <h2 className="title">Explorer</h2>
+          <h2 className="title">{t(ELabels.EXPLORER)}</h2>
         </div>
         <div className="structure">
           <div className="structure-workspace">
             <ChevronDownIcon />
-            <h3 className="title">Workspace</h3>
+            <h3 className="title">{t(ELabels.WORKSPACE)}</h3>
           </div>
           <div className="folder-view">
             <FileView structures={structures} />
           </div>
         </div>
+        <div className="resize-hover"></div>
       </FolderStructureWrapper>
     </Resizable>
   );

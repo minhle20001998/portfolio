@@ -16,6 +16,7 @@ import { ReactComponent as ChevronUpIcon } from './chevron-up.svg';
 import { ReactComponent as ChevronRightIcon } from './chevron-right.svg';
 import { ReactComponent as InfoIcon } from './info.svg';
 import { ReactComponent as CloseIcon } from './close.svg';
+import { ReactComponent as MailIcon } from './mail.svg';
 
 export {
   MenuIcon,
@@ -35,5 +36,6 @@ export {
   ChevronRightIcon,
   InfoIcon,
   ChevronUpIcon,
-  CloseIcon
+  CloseIcon,
+  MailIcon
 };

@@ -3,11 +3,32 @@ import styled from 'styled-components';
 export const ToolbarWrapper = styled.div`
   width: 48px;
   height: 100%;
-  background-color: ${({ theme }) => theme.subSecondaryColor};
+  background-color: ${({ theme }) => theme.toolBarColor};
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   overflow: auto;
+  user-select: none;
+
+  & .children {
+    height: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      height: 100%;
+      width: 80%;
+      background-color: ${({ theme }) => theme.secondaryIconColor};
+    }
+  }
+
+  & .react-tooltip {
+    border: 2px solid ${({ theme }) => theme.subSecondaryColor};
+    box-shadow: 0 0 2px ${({ theme }) => theme.secondaryColor};
+    background-color: ${({ theme }) => theme.primaryColor};
+    color: ${({ theme }) => theme.primaryTextColor};
+  }
 
   &::-webkit-scrollbar {
     width: 2px;
@@ -62,6 +83,13 @@ export const ToolbarWrapper = styled.div`
   }
 
   & .icon-wrapper.account-icon {
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  & .mail-icon {
     svg {
       height: 24px;
       width: 24px;

@@ -6,17 +6,24 @@ import { THEME } from '../interfaces';
 
 interface ICustomThemeContext {
   currentTheme: THEME;
-  themeReducer: (action: string, payload: any) => void;
+  themeReducer: (action: string, payload?: any) => void;
 }
 
 export const THEME_ACTIONS = {
   TOGGLE: 'toggle'
 };
 
-const CustomThemeContext = createContext<ICustomThemeContext | null>(null);
+const defaultTheme = THEME.DARK;
+
+const defaultThemeContextValue: ICustomThemeContext = {
+  currentTheme: defaultTheme,
+  themeReducer: () => {}
+};
+
+const CustomThemeContext = createContext<ICustomThemeContext>(defaultThemeContextValue);
 
 export default function CustomThemeProvider({ children }: { children?: JSX.Element }) {
-  const [currentTheme, setCurrentTheme] = useState(THEME.DARK);
+  const [currentTheme, setCurrentTheme] = useState(defaultTheme);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -27,7 +34,7 @@ export default function CustomThemeProvider({ children }: { children?: JSX.Eleme
     }
   }, []);
 
-  const themeReducer = (action: string, payload: any): void => {
+  const themeReducer = (action: string, payload?: any): void => {
     switch (action) {
       case THEME_ACTIONS.TOGGLE:
         setCurrentTheme(prev => {

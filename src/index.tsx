@@ -5,8 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CustomThemeProvider from './contexts/CustomThemeContext';
 import { BrowserRouter } from 'react-router-dom';
-import { ContentProvider } from './contexts';
+import { ContentProvider, TranslationProvider } from './contexts';
+import './utils/i18next';
 
+// use this function to apply providers instead of nesting them
 const Providers = ({
   providers,
   children
@@ -28,8 +30,16 @@ const Providers = ({
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
-  <Providers providers={[<BrowserRouter />, <CustomThemeProvider />, <ContentProvider />]}>
+  <Providers
+    providers={[
+      <BrowserRouter />,
+      <CustomThemeProvider />,
+      <ContentProvider />,
+      <TranslationProvider />
+    ]}
+  >
     <App />
   </Providers>
 );

@@ -12,7 +12,9 @@ export function EditorContent() {
 
   return (
     <EditorContentWrapper>
-      <ReactMarkdown linkTarget={'_blank'} children={currentContent?.content} />
+      <div className="content">
+        <ReactMarkdown linkTarget={'_blank'} children={currentContent?.content} />
+      </div>
     </EditorContentWrapper>
   );
 }

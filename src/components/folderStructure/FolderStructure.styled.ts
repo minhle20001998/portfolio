@@ -6,6 +6,17 @@ export const FolderStructureWrapper = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.secondaryColor};
 
+  & .resize-hover {
+    position: absolute;
+    top: 0;
+    right: -4px;
+    height: 100%;
+    width: 4px;
+    background-color: ${({ theme }) => theme.blue} !important;
+    opacity: 0;
+    transition: opacity ease-in-out 0.2s;
+  }
+
   & .title-container {
     padding: 10px 20px;
   }
@@ -73,11 +84,14 @@ export const FolderStructureWrapper = styled.div`
     }
 
     &:hover {
-      background-color: #2a2d2e;
+      background-color: ${({ theme }) => theme.hoverFileColor};
     }
   }
 
   & .file-view.selected {
     background-color: ${({ theme }) => theme.selectedFileColor};
+  }
+  & .file:focus {
+    display: none;
   }
 `;
